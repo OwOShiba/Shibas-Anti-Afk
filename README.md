@@ -6,3 +6,5 @@ https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.1.2023040
 good luck figuring out how it works ig
 
 p.s. roblox needs to be in fullscreen
+
+latest release: https://github.com/OwOShiba/Shibas-Anti-Afk/releases/download/Publish/Shibas_AntiAFK.exe
