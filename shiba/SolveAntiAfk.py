@@ -1,7 +1,9 @@
 import sys
 import pytesseract
+import pydirectinput
 from PIL import Image
 import re
+import math
 
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
@@ -14,6 +16,14 @@ except Exception as ex:
         use_grab = False
     else:
         raise ex
+
+def getSizeDiff():
+    origX = 1920
+    origY = 1080
+    newX, newY = pydirectinput.size()
+    Xdiff = int(math.floor(newX/origX))
+    Ydiff = int(math.floor(newY/origY))
+    return Xdiff, Ydiff
 
 def screenGrab( rect ):
     """ Given a rectangle, return a PIL Image of that part of the screen.
@@ -35,10 +45,11 @@ def screenGrab( rect ):
 
 def GIVEMEIT():
     print("giving")
-    x      = 1652
-    y      = 965
-    width  = 160
-    height = 32
+    diff1, diff2 = getSizeDiff()
+    x = 1652 * diff1
+    y = 965 * diff2
+    width  = 160 * diff1
+    height = 32 * diff2
 
     # Area of screen to monitor
     screen_rect = [ x, y, width, height ]  

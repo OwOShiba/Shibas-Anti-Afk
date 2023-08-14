@@ -2,15 +2,17 @@ from shiba.SolveAntiAfk import *
 from shiba.Movements import *
 import time
 
+diff1, diff2 = getSizeDiff()
+
 def wait(n):
     time.sleep(n)
 
 def pressAntiAFK():
-    MoveMouse(520, 775)
+    MoveMouse(520 * diff1, 775 * diff2)
     wait(.1)
     MouseClick('left')
     wait(.01)
-    pydirectinput.leftClick(521, 776, .1, .1)
+    pydirectinput.leftClick(521 * diff1, 776 * diff2, .1, .1)
     wait(.01)
     MouseClick('left')
     wait(.1)
@@ -59,11 +61,11 @@ while True:
     wait(.5)
     text = GIVEMEIT()
     if text != "False":
-        pydirectinput.moveTo(1714, 1025)
+        pydirectinput.moveTo(1714 * diff1, 1025 * diff2)
         wait(.1)
         MouseClick('left')
         wait(.01)
-        pydirectinput.leftClick(1715, 1026)
+        pydirectinput.leftClick(1715 * diff1, 1026 * diff2)
         wait(.01)
         MouseClick('left')
         wait(.1)

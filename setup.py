@@ -4,7 +4,7 @@ base = None
 
 executables = [Executable("AntiAFK.py", base=base)]
 
-packages = ["idna", "time", "random", "pydirectinput", "re", "PIL", "pytesseract"]
+packages = ["idna", "time", "random", "pydirectinput", "re", "PIL", "pytesseract", "math"]
 options = {
     'build_exe': {    
         'packages':packages,
