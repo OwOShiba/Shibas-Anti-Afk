@@ -39,8 +39,8 @@ def MouseHold(butt, dur):
     time.sleep(dur)
     pydirectinput.mouseUp(button=butt)
 
-def RandomDrag():
+def RandomDrag(x1, y1):
     diff1, diff2 = getSizeDiff()
     pydirectinput.mouseDown(button='right')
-    pydirectinput.moveTo(random.randint(500 * diff1, 1400 * diff2), random.randint(200 * diff1, 800 * diff2), .3)
+    pydirectinput.moveTo(random.randint((500-x1) * diff1, (1400-y1) * diff2), random.randint((200-x1) * diff1, (800-y1) * diff2), .3)
     pydirectinput.mouseUp(button='right')

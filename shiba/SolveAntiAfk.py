@@ -4,6 +4,7 @@ import pydirectinput
 from PIL import Image
 import re
 import math
+from Utils import *
 
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
@@ -11,43 +12,31 @@ try:
     from PIL import ImageGrab
     use_grab = True
 except Exception as ex:
-    if ( sys.platform == 'linux' ):
-        from Xlib import display, X   
-        use_grab = False
-    else:
-        raise ex
+    raise ex
 
-def getSizeDiff():
+def getSizeDiff(window):
     origX = 1920
     origY = 1080
-    newX, newY = pydirectinput.size()
+    newX, newY = getWindowSize(window)
     Xdiff = int(math.floor(newX/origX))
     Ydiff = int(math.floor(newY/origY))
     return Xdiff, Ydiff
 
 def screenGrab( rect ):
-    """ Given a rectangle, return a PIL Image of that part of the screen.
-        Handles a Linux installation with and older Pillow by falling-back
-        to using XLib """
     global use_grab
     x, y, width, height = rect
 
     if ( use_grab ):
         image = ImageGrab.grab( bbox=[ x, y, x+width, y+height ] )
     else:
-        # ImageGrab can be missing under Linux
-        dsp  = display.Display()
-        root = dsp.screen().root
-        raw_image = root.get_image( x, y, width, height, X.ZPixmap, 0xffffffff )
-        image = Image.frombuffer( "RGB", ( width, height ), raw_image.data, "raw", "BGRX", 0, 1 )
-        # DEBUG image.save( '/tmp/screen_grab.png', 'PNG' )
+        return
     return image
 
-def GIVEMEIT():
+def GIVEMEIT(window, x1, y1):
     print("giving")
-    diff1, diff2 = getSizeDiff()
-    x = 1652 * diff1
-    y = 965 * diff2
+    diff1, diff2 = getSizeDiff(window)
+    x = (1652- x1) * diff1
+    y = (965-y1) * diff2
     width  = 160 * diff1
     height = 32 * diff2
 
@@ -76,6 +65,6 @@ def GIVEMEIT():
             print(sub)
             return str(sub)
         else:
-            return "I'm bad at math.."
+            return
     else:
-        return "No Anti-Afk yet!"
+        return
