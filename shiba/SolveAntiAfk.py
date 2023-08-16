@@ -18,8 +18,8 @@ def getSizeDiff(window):
     origX = 1920
     origY = 1080
     newX, newY = getWindowSize(window)
-    Xdiff = int(math.floor(newX/origX))
-    Ydiff = int(math.floor(newY/origY))
+    Xdiff = (newX/origX)
+    Ydiff = (newY/origY)
     return Xdiff, Ydiff
 
 def screenGrab( rect ):
@@ -34,11 +34,13 @@ def screenGrab( rect ):
 
 def GIVEMEIT(window, x1, y1):
     print("giving")
+    # print(x1, y1)
     diff1, diff2 = getSizeDiff(window)
-    x = (1652- x1) * diff1
-    y = (965-y1) * diff2
+    x = (1652* diff1) + x1
+    y = (965* diff2) + y1
     width  = 160 * diff1
     height = 32 * diff2
+    # print(x, y, width, height)
 
     # Area of screen to monitor
     screen_rect = [ x, y, width, height ]  
@@ -65,6 +67,6 @@ def GIVEMEIT(window, x1, y1):
             print(sub)
             return str(sub)
         else:
-            return
+            return "a"
     else:
-        return
+        return "a"

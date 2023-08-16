@@ -16,18 +16,18 @@ def getSizeDiff(window):
 def wait(n):
     time.sleep(n)
 
-def pressAntiAFK(diff1, diff2, x1, y1):
-    MoveMouse(520 * diff1, 775 * diff2)
+def pressAntiAFK(diff1, diff2, x1, y1, x, y):
+    MoveMouse((520 * diff1) + x, (775 * diff2) + y)
     wait(.1)
     MouseClick('left')
     wait(.01)
-    pydirectinput.leftClick((521-x1) * diff1, (776-y1) * diff2, .1, .1)
+    pydirectinput.leftClick((521* diff1) + x, (776* diff2)+y, .1, .1)
     wait(.01)
     MouseClick('left')
     wait(.1)
     MoveMouse(900, 500)
 
-def movearound(x1, y1):
+def movearound(x, y, x1, y1):
     KeyDown('w')
     wait(.3)
     KeyUp('w')
@@ -35,7 +35,7 @@ def movearound(x1, y1):
     KeyDown('a')
     wait(.3)
     KeyUp('a')
-    RandomDrag(x1, y1)
+    RandomDrag(x, y, x1, y1)
     KeyDown('s')
     wait(.3)
     KeyUp('s')
@@ -46,7 +46,7 @@ def movearound(x1, y1):
     KeyDown('w')
     wait(.3)
     KeyUp('w')
-    RandomDrag(x1, y1)
+    RandomDrag(x, y, x1, y1)
     KeyDown('a')
     wait(.3)
     KeyUp('a')
@@ -58,13 +58,10 @@ def movearound(x1, y1):
     KeyDown('d')
     wait(.3)
     KeyUp('d')
-    RandomDrag(x1, y1)
+    RandomDrag(x, y, x1, y1)
     wait(.3)
-
-def Start(ae):
-    print("started")
-
 pydirectinput.FAILSAFE = False
+
 def Start():
     while True:
         windows = pywinauto.Desktop(backend="uia").windows()
@@ -74,23 +71,22 @@ def Start():
                 handle = w.handle
                 sizeDiffX, sizeDiffY = getSizeDiff(handle)
                 x, y, x1, y1 = win32gui.GetClientRect(handle)
+                print(win32gui.GetClientRect(handle))
                 wait(3)
-                movearound(x, y)
+                movearound(x, y, x1, y1)
                 wait(.1)
-                pressAntiAFK(sizeDiffX, sizeDiffY, x, y)
+                pressAntiAFK(sizeDiffX, sizeDiffY, x1, y1, x, y)
                 wait(.5)
                 text = GIVEMEIT(handle, x, y)
                 if text != "False":
-                    pydirectinput.moveTo((1714-x) * sizeDiffX, (1025-y) * sizeDiffY)
+                    pydirectinput.moveTo(((1714)-(1714-x1)) * sizeDiffX, ((1025)-(1025-y1)) * sizeDiffY)
                     wait(.1)
                     MouseClick('left')
                     wait(.01)
-                    pydirectinput.leftClick((1715-x) * sizeDiffX, (1026-y) * sizeDiffY)
+                    pydirectinput.leftClick(((1714)-(1714-x1)) * sizeDiffX, ((1025)-(1025-y1)) * sizeDiffY)
                     wait(.01)
                     MouseClick('left')
                     wait(.1)
                     pydirectinput.write(text, .15)
                     PressKey('enter')
                 wait(5) # I LVOE STAYLOR SWIFT
-
-
