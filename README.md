@@ -12,4 +12,5 @@ latest release: https://github.com/OwOShiba/Shibas-Anti-Afk/releases/download/Pu
 
 
 update: this currently doesn't work sometimes cause i was asked to make it compatible for more people which ended up breaking it but i prob wont fix it cause i dont like this game
+
 update 2: game is dead now and no longer needs anti-afk so no more updates !!
